@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Online Shopping</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'font\css\all.css' %}">
+    <style type="text/css">
+	body{
+		margin: 0px;
+		align-items: center;
+		align-content: center;
+		box-sizing: border-box;
+	}
+	#main{
+		min-height: 1000px;
+		width:100%;
+		background-color:lightpink;
+		//border:1px solid;
+	}
+	#header{
+		min-height:75px;
+		width: 100%;
+		//background-color: white;
+		line-height: 75px;
+		font-size: 6vw;
+		font-weight: bold;
+		text-align: center;
+		text-transform: uppercase;
+		//color: linear-gradient(to right,red,yellow);
+		background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+	}
+	#nav-bar{
+		min-height:50px;
+		width: 100%;
+		background-color: black;
+		//padding-left: 5%;
+	}
+	#slider{
+		//min-height:500px;
+		width: 100%;
+		background-color: white;
+	}
+		.slider-item{
+			//min-height: 500px;
+			width: 100%;
+			display: none;
+		}
+		.fade{
+			animation: fade 2s;
+		}
+		@keyframes fade{
+			from{
+				opacity: 0.4;
+			}
+			to{
+				opacity: 1;
+			}
+		}
+		ul{
+			list-style-type: none;
+			margin: 0px;
+			margin-left: 5%;
+		}
+		ul li{
+			display: inline-block;
+			height:100%;
+			width: 12%;
+		}
+		ul li a{
+			text-decoration: none;
+			margin: 0px;
+			color: white;
+			line-height: 50px;
+			font-size: 20px;
+			text-align: center;
+		}
+		ul li:hover a{
+			color: red;
+		}
+		.page{
+			position: absolute;
+			list-style: none;
+			width: 240px;
+			padding: 20px 0;
+			visibility: hidden;
+			//list-style: none;
+			margin: 0;
+			opacity: 0;
+			margin-top: 50px;
+			background: #fff;
+			z-index: 99;
+			transition: all 0.4s;
+			box-shadow: 2px 7px 20px rgba(0, 0, 0, 0.05);
+		}
+		#main li:hover .page{
+			visibility: visible;
+			opacity: 1;
+			margin-top: 0;
+		}
+		#main li .page li{
+			display: block;
+			margin: 0px;
+			padding: 0px;
+			width: 100%;
+			margin-left: 15%;
+			min-height:30px;
+		}
+		#main li .page li a{
+			line-height: 10px;
+			font-size: 16px;
+			color: black;
+			font-weight: normal;
+			letter-spacing: .5px;
+		}
+		#main li .page li a:hover{
+			color: red;
+		}
+		.bar{
+			margin-top: 40px;
+			margin-left: 20px;
+			display: none;
+		}
+		@media (max-width: 1000px)
+		{
+			ul li{
+				display: block;
+				height: 50px;
+				width: 100%;
+			}
+			ul li a{
+			text-decoration: none;
+			margin: 0px;
+			color: white;
+			line-height: 50px;
+			font-size: 30px;
+			text-align: center;
+			letter-spacing: 1px;
+		}
+		.page{
+			position: relative;
+			z-index: 0px;
+		}
+		.menu{
+			display: none;
+		}
+		.bar{
+			display: inline-block;
+		}
+		#nav-bar li{
+			z-index: 66;
+		}
+		}
+
+		.bar1,.bar2,.bar3{
+			height:5px;
+			width: 35px;
+			background-color: white;
+			color: white;
+			//position: absolute;
+			margin-top: -12px;
+			//transform: rotate(45deg);
+			transition: .4s;
+		}
+		.change .bar1{
+			transform: rotate(45deg) translate(-9.5px,-6.5px);
+		}
+		.change .bar2{
+			opacity: 0;
+		}
+		.change .bar3{
+			transform: rotate(-45deg) translate(-4px,-1px);
+		}
+		.active{
+			display: block;
+		}
+		.mai{
+			height: 500px;
+			width: 100%;
+			//background-color: green;
+			//display: inline-flex;
+			overflow: hidden;
+			white-space: nowrap;
+		}
+		.main .content{
+			display: inline-block;
+		}
+		.cont{
+			min-height: 400px;
+			width: 250px;
+			//background-color: red;
+			//display: inline-block;
+			//margin-left: 10px;
+			transition: 0.1s;
+		}
+
+		@keyframes fir{
+			0%{
+				transform: translateX(0px);
+			}
+			100%{
+				transform: translateX(-50px);
+			}
+		}
+		#righ
+		{
+			cursor: pointer;
+			height: 400px;
+			width:60px;
+			background-image: linear-gradient(to right,rgba(255,255,255,0),rgba(255,255,255,1));
+			//border:1px solid purple;
+			position: absolute;
+			z-index: 99;
+			//top: 25%;
+			//margin-top: 25%;
+			float: right;
+			right: 0;
+			top: 40;
+			opacity: 0.5;
+		}
+		#lef
+		{
+			cursor: pointer;
+			height: 400px;
+			width:60px;
+			background-image: linear-gradient(to left,rgba(255,255,255,0),rgba(255,255,255,1));
+			//border:1px solid pink;
+			position: absolute;
+			//top: 25%;
+			z-index: 99;
+			float: left;
+			top: 20;
+			opacity: 0.5;
+		}
+		#righ:hover,
+		#lef:hover
+		{
+			opacity: 1;
+		}
+		.arrowleft
+		{
+			margin: 10px auto;
+			display: block;
+			height: 20px;
+			width:20px;
+			border-right: 5px solid;
+			border-bottom: 5px solid;
+			box-sizing: border-box;
+			transform: rotate(135deg);
+			margin-top: 200px;
+		}
+		.arrowright
+		{
+			margin: 10px auto;
+			display: block;
+			height: 20px;
+			width:20px;
+			border-right: 5px solid;
+			border-bottom: 5px solid;
+			box-sizing: border-box;
+			transform: rotate(-45deg);
+			margin-top: 200px;
+		}
+		.information{
+			height: 50px;
+			width: 250px;
+			margin-top: 0px;
+			//margin-left: 10px;
+			//background-color: green;
+			color: black;
+			font-size: 20px;
+		}
+		.content{
+			min-height: 500px;
+			width: 250px;
+			//background-color: red;
+			display: inline-block;
+			margin-left: 10px;
+			transition: 0.5s;
+		}
+		.cont:hover{
+			transform: scale(1.12);
+			box-shadow: 5px 10px 40px red;
+			position: absolute;
+		}
+		#footer{
+			margin-top: 25px;
+			min-height: 300px;
+			width: 100%;
+			background-color: black;
+		}
+		#allpart{
+			height: 250px;
+			width: 90%;
+			margin: 0px auto;
+			//border: 1px solid white;
+		}
+		.part{
+			height: 200px;
+			width: 20%;
+			margin-left: 8%;
+			margin-top: 30px;
+			//border: 1px solid white;
+			float: left;
+		}
+		#login
+		{
+			background-color: white;
+			z-index: 200;
+			top: 15%;
+			position: fixed;
+			left:35vw;
+			display: none;
+			padding: 3%;
+			box-sizing: border-box;
+			border-radius: 5%;
+		}
+		.sp
+		{
+			position: relative;
+			transition: 0.5s;
+			top:-30px;
+			left: 30px;
+			pointer-events: none;
+			font-size: 15px;
+			letter-spacing: 1px;
+			font-weight: bold;
+		}
+		.inp
+		{
+			border:none;
+			outline: none;
+			box-sizing: border-box;
+			border-bottom: 1px solid;
+			border: 1px solid blue;
+			border-radius: 5px;
+			height: 40px;
+			width: 95%;
+			font-size: 20px;
+			line-height: 25px;
+			box-shadow: 1px 1px 2px blue;
+			margin: 10px 5px 5px 10px;
+		}
+		.inp:focus
+		{
+			border:2px solid blue;
+			border-radius: 5px;
+			box-shadow: 1px 1px 5px blue;
+		}
+		.input-group input[type="text"]:focus ~ .sp,
+		.input-group input[type="text"]:valid ~ .sp
+		{
+			top: -55px;
+			left: 20px;
+			background-color: white;
+			//font-size: 10px;
+		}
+		.input-group input[type="password"]:focus ~ .sp,
+		.input-group input[type="password"]:valid ~ .sp
+		{
+			top: -55px;
+			left: 20px;
+			background-color: white;
+			//font-size: 10px;
+		}
+		.input-group
+		{
+			height: 60px;
+			width:300px;
+			margin: 10px auto;
+			//border: 1px solid;
+		}
+		#login-form
+		{
+			min-height: 100px;
+			width:300px;
+			margin: 10px auto;
+			//border: 1px solid;
+
+		}
+		input[type="submit"]{
+			height:40px;
+			width: 100%;
+			background-color: lightgreen;
+			font-size: 20px;
+		}
+</style>
+<script type="text/javascript">
+		var j=0;
+		function slide() {
+			var x=document.getElementsByClassName('slider-item');
+			for(var i=0;i<x.length;i++)
+				x[i].style.display="none";
+			x[j].style.display="block";
+			j++;
+			j=j%x.length;
+			setTimeout(slide,2000);
+		}
+		function ba(x){
+			//alert("hii");
+			x.classList.toggle("change");
+			document.querySelector(".menu").classList.toggle("active");
+		}
+		var c=1;
+		var d=1;
+		var curr=0;
+		function fun(){
+
+			var x=document.getElementsByClassName("content");
+			var val=(x[0].offsetWidth+20);
+			var s=((window.innerWidth)/val);
+			if(curr<(val*(x.length-s)))
+				{
+					curr=curr+val;
+			for(var i=0;i<x.length;i++)
+			{
+				x[i].style.transform="translateX(-"+curr+"px)";
+			}
+		}
+		}
+		function fu(){
+			if(curr>0)
+			{var x=document.getElementsByClassName("content");
+			var val=(x[0].offsetWidth+20);
+			curr=curr-val;
+			for(var i=0;i<x.length;i++)
+			{
+				x[i].style.transform="translateX(-"+curr+"px)";
+			}
+			}
+		}
+		function display()
+		{
+			document.getElementById("login").style.display="block";
+			document.getElementById("main").style.opacity="0.5";
+		}
+		function dis()
+		{
+			document.getElementById("login").style.display="none";
+			document.getElementById("main").style.opacity="1";
+		}
+		function togg(){
+			var temp=document.getElementById("pass");
+			if(temp.type === "password"){
+				temp.type="text";
+			}
+			else
+			{
+				temp.type="password";
+			}
+		}
+	</script>
+</head>
+<body onload="slide()">
+	<div id="login" style="border:1px solid">
+		<div style="font-size: 20px;float: right;cursor: pointer;" onclick="dis()">
+		<div class="change" style="color: black;margin-top: 20px;">
+					<div class="bar1" style="background-color: red;width:25px;"></div>
+					<div class="bar2"></div>
+					<div class="bar3" style="background-color: red;width: 25px;"></div>
+			</div>
+		</div><br/>
+		<h1 style="text-align: center;text-transform: uppercase;">Login</h1>
+		<form action="{% url 'online:validateuser' %}" method="post">
+		{% csrf_token %}
+		<div id="login-form">
+		<div class="input-group">
+		<input type="text" name="userid" class="inp" required/>
+		<span class="sp">Username</span>
+		</div>
+		<div class="input-group">
+		<input type="password" name="password" class="inp" id="pass" required/>
+		<span class="sp">Password</span>
+		</div>
+		<div class="input-group">
+		<input type="checkbox" onclick="togg()" name=""/>Show Password
+		</div>
+		<div class="input-group">
+		<input type="submit" value="Login"/>
+		</div>
+	</div>
+	</form>
+	</div>
+    <div id="main">
+		<div id="header">
+			Online Shopping
+			<a href="#" onclick="display()" style="text-decoration: none;font-size: 2vw;color: white">Login</a>
+		</div>
+		<div id="nav-bar">
+			<div class="bar" onclick="ba(this)">
+
+					<div class="bar1"></div>
+					<div class="bar2" ></div>
+					<div class="bar3"></div>
+			</div>
+			<div class="menu">
+			<ul>
+				<li><a href="{% url 'online:product_list' %}">Home</a></li>
+				<li><a href="">Women</a>
+				<ul class="page">
+					{% for c in categories %}
+					{% if c.super == '1' %}
+						<li><a href="{{ c.get_absolute_url }}">{{c.name}}</a></li>
+					{% endif %}
+					{% endfor %}
+					</ul></li>
+				<li><a href="">Men</a>
+				<ul class="page">
+						{% for c in categories %}
+					{% if c.super == '2' %}
+						<li><a href="{{ c.get_absolute_url }}">{{c.name}}</a></li>
+					{% endif %}
+					{% endfor %}
+					</ul></li>
+				<li><a href="">Baby & Kids</a>
+				<ul class="page">
+						{% for c in categories %}
+					{% if c.super == '3' %}
+						<li><a href="{{ c.get_absolute_url }}">{{c.name}}</a></li>
+					{% endif %}
+					{% endfor %}
+					</ul></li>
+				<li><a href="">Jewelry</a>
+				<ul class="page">
+						{% for c in categories %}
+					{% if c.super == '4' %}
+						<li><a href="{{ c.get_absolute_url }}">{{c.name}}</a></li>
+					{% endif %}
+					{% endfor %}
+					</ul></li>
+				<li><a href="">Shoes</a>
+				<ul class="page">
+						{% for c in categories %}
+					{% if c.super == '5' %}
+						<li><a href="{{ c.get_absolute_url }}">{{c.name}}</a></li>
+					{% endif %}
+					{% endfor %}
+					</ul> </li>
+					<li><a href="">Electronics</a>
+					<ul class="page">
+						{% for c in categories %}
+					{% if c.super == '6' %}
+						<li><a href="{{ c.get_absolute_url }}">{{c.name}}</a></li>
+					{% endif %}
+					{% endfor %}
+					</ul></li>
+				<li><a href="#">Pages</a>
+					<ul class="page" style="right: 40px">
+						<li><a href="">Product Page</a></li>
+						<li><a href="">Catergory Page</a></li>
+						<li><a href="">Cart Page</a></li>
+						<li><a href="">Checkout Page</a></li>
+						<li><a href="">Contact Page</a></li>
+					</ul> </li>
+				<!--<li><a href="">Blog</a></li>-->
+			</ul>
+		</div>
+		</div>
+		{% if not category %}
+		<div id="slider">
+			<div class="slider-item fade">
+				<img src="{% static 'images/bg.jpg' %}" style="width: 100%;">
+			</div>
+			<div class="slider-item fade">
+				<img src="{% static 'images/bg-2.jpg' %}" style="width: 100%">
+			</div>
+			<div class="slider-item fade">
+				<img src="{% static 'images/lap.jpg' %}" style="width: 100%">
+			</div>
+		</div>
+		<span style="font-size: 5vw;margin: 20px 30%;">Latest Products</span>
+		<div class="mai">
+			<div onclick="fu()" id="lef">
+				<div class="arrowleft"></div>
+			</div>
+			<div style="overflow: hidden;float: left;margin: 0;">
+				{% for x in products %}
+				<a href="{{ x.get_absolute_url }}">
+					<div class="content">
+						<div class="cont" style="background: url('{{x.image.url}}');background-size: cover;"></div>
+							<div class="information">
+								<h3 style="float: left;">{{x.name}}</h3>
+								<h3 style="float: right;margin-right: 5px;">&#8377;{{x.price}}</h3></div>
+							</div>
+				</a>
+				{% endfor %}
+		</div>
+		<div onclick="fun()" id="righ">
+			<div class="arrowright"></div>
+		</div>
+	</div>
+		{% endif %}
+		<br/>
+		{% if category %}
+		{% for product in products %}
+		<a href="{{ product.get_absolute_url }}">
+					<div class="content">
+						<div class="cont" style="background: url('{{ product.image.url }}');background-size: cover;"></div>
+							<div class="information">
+								<h3 style="float: left;">{{ product.name }}</h3>
+								<h3 style="float: right;margin-right: 5px;">&#8377;{{ product.price }}</h3></div>
+							</div>
+				</a>
+                  {% endfor %}
+		{% endif %}
+	<div id="footer" style="color: white">
+		<div id="allpart">
+		<div class="part">
+			<h2>About US</h2>
+				<a href="" style="color: white;text-decoration: none;">About Us</a><br>
+				<a href="" style="color: white;text-decoration: none;">Contact Us</a><br>
+				<a href="" style="color: white;text-decoration: none;">Career</a><br>
+				<a href="" style="color: white;text-decoration: none;">Blog</a><br>
+				<a href="" style="color: white;text-decoration: none;">Complain</a><br>
+		</div>
+		<div class="part">
+			<h2>Mail Us</h2>
+			Flipkart Internet Private Limited,Buildings Alyssa, Begonia &Clove Embassy Tech Village,Outer Ring Road, Devarabeesanahalli Village,Bengaluru, 560103,Karnataka, India.</div>
+		<div class="part">
+			<h2>Registered Office</h2>
+			Flipkart Internet Private Limited,Buildings Alyssa, Begonia &Clove Embassy Tech Village,Outer Ring Road, Devarabeesanahalli Village,Bengaluru, 560103,Karnataka, IndiaCIN : U51109KA2012PTC066107Telephone: 1800 208 9898
+		</div>
+	</div>
+	<div style="margin-left: 15%;float: left;">
+		<a href="https://www.instagram.com/ratnesh_verma20/"  style="text-decoration: none;color: white"><i class="fab fa-instagram fa-2x" style="color: red;"></i><span style="font-size: 1.5vw;line-height: 100%">&nbsp;&nbsp;ratnesh_verma20</span></a>
+	</div>
+	<div style="margin-left: 15%;float: left;">
+		<a href="https://www.facebook.com/ratnesh.verma.359778"  style="text-decoration: none;color: white"><i class="fab fa-facebook-square fa-2x" style="color: blue;background-color: white"></i><span style="font-size: 1.5vw;line-height: 100%;">&nbsp;&nbsp;ratneshdydx</span></a>
+	</div>
+
+	<div style="margin-left: 15%;float: left;">
+		<i class="fab fa-twitter fa-2x" style="color: lightblue;"></i>
+	</div>
+</div>
+		<p style="float: right;margin-right: 10%;font-size: 2vw">&copy;Ratnesh,Shravan and Shikher</p>
+</div>
+</body>
+</html>
